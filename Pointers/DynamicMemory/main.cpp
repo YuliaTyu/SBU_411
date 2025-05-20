@@ -72,22 +72,15 @@ void main()
 	Print(arr, n);
 
 	Print(arr = pop_back(arr, n), n);
-	Print(arr = pop_back(arr, n), n);
-	Print(arr = pop_back(arr, n), n);
-	Print(arr = pop_back(arr, n), n);
-	Print(arr = pop_back(arr, n), n);
 	Print(arr, n);
-	Print(arr, n);
-	Print(arr, n);
-	Print(arr, n);
-	Print(arr, n);
-	Print(arr, n);
-	Print(arr, n);
-	Print(arr, n);
+	
 
 	delete[] arr;
 	//Memory leak  
 #endif // DYNAMIC_MEMORY_1
+
+
+#ifdef DYNAMIC_MEMORY_2
 
 	int rows;
 	int cols;
@@ -103,14 +96,8 @@ void main()
 		arr[i] = new int[cols];
 	}
 
-	cout << "Память выделена, для добавления столбца";
-	system("PAUSE");
 
-	push_col_back(arr, rows, cols);
-
-	cout << "Столбец добавлен" << endl;
-
-	/*FillRand(arr, rows, cols);
+	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
 
 	//int   - 'int';
@@ -120,14 +107,14 @@ void main()
 	arr = push_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
 
-	push_col_back(arr, rows, cols);
-	Print(arr, rows, cols);
+	//push_col_back(arr, rows, cols);
+	//Print(arr, rows, cols);
 
-	arr = pop_row_back(arr, rows, cols);
-	Print(arr, rows, cols);
+	//arr = pop_row_back(arr, rows, cols);
+	//Print(arr, rows, cols);
 
-	pop_col_back(arr, rows, cols);
-	Print(arr, rows, cols);*/
+	//pop_col_back(arr, rows, cols);
+	//Print(arr, rows, cols);
 
 	//1) Сначала удаляем строки:
 	for (int i = 0; i < rows; i++)
@@ -137,7 +124,7 @@ void main()
 
 	//2) Удаляем массив указателей:
 	delete[] arr;
-
+#endif // DEBUG
 }
 
 void FillRand(int arr[], const int n)
