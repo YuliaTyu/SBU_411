@@ -40,17 +40,14 @@ void push_col_front(int** arr, const int rows, int& cols);       //добавл�
 //int** insert_col(int** arr, const int rows, int& cols, const int index); //добавляет столбец в массив по указанному индексу
 void pop_col_back(int** arr, const int rows, int& cols);    //удалет столбик из конца массива
 
-
-
-//#define DINAMIC_MEMORY_1
-#define DINAMIC_MEMORY_2
-
+//#define DIN_MEM_1
+#define DIN_MEM_2
 
 void main()
 {
 	setlocale(LC_ALL, "");
 
-#ifdef DINAMIC_MEMORY_1
+#ifdef DIN_MEM_1
 
 
 	int n;
@@ -98,10 +95,11 @@ void main()
 
 	delete[] arr;
 
-#endif // DINAMIC_MEMORY_1
 
-#ifdef DINAMIC_MEMORY_2
+#endif
 
+
+#ifdef DIN_MEM_2
 
 	int rows;
 	int cols;
@@ -123,8 +121,6 @@ void main()
 	push_col_back(arr, rows, cols);
 
 	cout << "Столбец добавлен" << endl;
-
-
 
 	/*FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
@@ -148,8 +144,6 @@ void main()
 	Print(arr, rows, cols);*/
 
 
-
-
 	//очистить память
 	for (int i = 0; i < rows; i++) // сначала удаляем строки
 	{
@@ -157,7 +151,7 @@ void main()
 	}
 	delete[] arr;                  // удаляем массив укзателей
 
-#endif // DINAMIC_MEMORY_2
+#endif
 
 }
 
@@ -263,24 +257,6 @@ int* Erase(int arr[], int& n, const int index)
 	delete[] arr;
 	arr = buffer;
 	return buffer;
-}
-
-
-void Allocate(int**& arr, const int rows, const int cols)
-{
-	arr = new int* [rows];
-	for (int i = 0; i < rows; i++)
-	{
-		arr[i] = new int[cols];
-	}
-}
-void Clear(int**& arr, const int rows)
-{
-	for (int i = 0; i < rows; i++)
-	{
-		delete[]arr[i];
-	}
-	delete arr;
 }
 
 
