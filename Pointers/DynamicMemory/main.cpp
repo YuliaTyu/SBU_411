@@ -13,6 +13,7 @@ using std::endl;
 void FillRand(int arr[], const int n);
 void FillRand(double arr[], const int n);
 void FillRand(int** arr, const int rows, const int cols);
+void FillRand(double** arr, const int rows, const int cols);
 
 
 template<typename T>void Print(T arr[], const int n);
@@ -41,6 +42,8 @@ template<typename T>void pop_col_back(T** arr, const int rows, int& cols);      
 
 //#define DIN_MEM_1
 #define DIN_MEM_2
+
+#define DATA_TYPE double
 
 void main()
 {
@@ -105,13 +108,17 @@ void main()
 	cout << "Введите кол-во строк"; cin >> rows;
 	cout << "Введите кол-во элементов строки"; cin >> cols;
 
+
+	typedef double DataType; // существующему типу данных дает второе имя
+
+
 	//(указатель ** на указатель)создаем массив указателей
-	int** arr = new int* [rows];
+	DataType** arr = new DataType * [rows];
 
 	//выделяем память под строки двумерного динамич массива
 	for (int i = 0; i < rows; i++)
 	{
-		arr[i] = new int[cols];
+		arr[i] = new DataType[cols];
 	}
 	cout << endl;
 
@@ -133,8 +140,8 @@ void main()
 	push_col_back(arr, rows, cols);
 	Print(arr, rows, cols);
 
-	push_col_front(arr, rows, cols);
-	Print(arr, rows, cols);
+	//push_col_front(arr, rows, cols);
+	//Print(arr, rows, cols);
 
 	arr = pop_row_back(arr, rows, cols);
 	Print(arr, rows, cols);
@@ -179,6 +186,20 @@ void FillRand(int** arr, const int rows, const int cols)
 		for (int j = 0; j < cols; j++)
 		{
 			arr[i][j] = rand() % 100;
+		}
+	}
+}
+void FillRand(double** arr, const int rows, const int cols)
+{
+	{
+		//заполнем рандомом и выводим на экран
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; j++)
+			{
+				arr[i][j] = double(rand() % 10000)/100;
+
+			}
 		}
 	}
 }
@@ -268,12 +289,13 @@ template<typename T>T* Erase(T arr[], int& n, const int index)
 }
 
 
+
 template<typename T>T** push_row_back(T** arr, int& rows, const int cols)
 {
 	T** buffer = new T* [rows + 1];                //создаем буфферный массив указателей нужного размера
 	for (int i = 0; i < rows; i++)buffer[i] = arr[i];//копируем адреса строк в буфферный массив указателей
 	delete[] arr;                                    // удаляем массив укзателей	
-	buffer[rows] = new int[cols] {};                 //создаем добавляемую строку и записываем ее адрес в массив указателей 
+	buffer[rows] = new T[cols] {};                 //создаем добавляемую строку и записываем ее адрес в массив указателей 
 	rows++;                                          //при добавлении в массив строки количество его строк увеличивается на 1
 	return buffer;                                   //возвращаем новый массив на место вызова
 }
@@ -282,17 +304,17 @@ template<typename T>T** push_row_front(T** arr, int& rows, int& cols)
 	T** buffer = new T* [rows + 1];                   //создаем буффер указателей нужного размера
 	for (int i = 0; i < rows; i++)buffer[i + 1] = arr[i];   //копируем адреса строк в буфферный массив указателей
 	delete[] arr;                                         // удаляем массив укзателей	
-	buffer[0] = new int[cols] {};                         //создаем добавляемую строку и записываем ее адрес в массив указателей
+	buffer[0] = new T[cols] {};                         //создаем добавляемую строку и записываем ее адрес в массив указателей
 	rows++;                                               //при добавлении в массив строки количество его строк увеличивается на 1
 	return buffer;                                        //возвращаем новый массив на место вызова
 }
 
 template<typename T>T** pop_row_back(T** arr, int& rows, const int cols)
 {
-	delete[] arr[rows - 1];//удалем последнюю строку
-	T** buffer = new T* [--rows];           //создеам буфферный массив указателей
+	delete[] arr[rows - 1];                      //удалем последнюю строку
+	T** buffer = new T* [--rows];                 //создеам буфферный массив указателей
 	for (int i = 0; i < rows; i++)buffer[i] = arr[i]; // копируем оставшиеся строки в буферный массив указателей
-	delete[] arr;        // удаляем массив указателей
+	delete[] arr;                                 // удаляем массив указателей
 	return buffer;
 }
 
@@ -319,7 +341,7 @@ template<typename T>void push_col_front(T** arr, const int rows, int& cols)
 	}
 	cols--;
 }
-
+///??????
 template<typename T>void pop_col_back(T** arr, const int rows, int& cols)
 {
 	cols--;
