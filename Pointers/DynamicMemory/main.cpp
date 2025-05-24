@@ -312,20 +312,20 @@ template<typename T>void push_col_front(T** arr, const int rows, int& cols)
 
 	for (int i = 0; i < rows; i++)
 	{
-		int* buffer = new int[cols] {};
+		T* buffer = new T[cols] {};
 		for (int j = 0; j < cols; j++)buffer[j] = arr[i][j];
 		delete[] arr[i];
 		arr[i] = buffer;
 	}
 	cols--;
 }
-//????????/
+
 template<typename T>void pop_col_back(T** arr, const int rows, int& cols)
 {
 	cols--;
 	for (int i = 0; i < rows; i++)
 	{
-		int* buffer = new int[cols];
+		T* buffer = new T[cols];
 		for (int j = 0; j < cols; j++)buffer[j] = arr[i][j];    //копируем исходную строку в буффер
 		delete[] arr[i];
 		arr[i] = buffer;
