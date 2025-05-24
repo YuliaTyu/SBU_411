@@ -9,7 +9,7 @@ void main()
 	setlocale(LC_ALL, "");
 	const int n = 10;
 	int arr[n];
-	FillRand(arr, n);
+	FillRand(arr, n, 0, 100);
 	Print(arr, n);
 
 	//1) Считаем количество четных и нечетных элементов:
@@ -45,7 +45,7 @@ void main()
 	delete[] even_arr;
 }
 
-void FillRand(int arr[], const int n)
+void FillRand(int arr[], const int n, int minRand, int maxRand)
 {
 	for (int i = 0; i < n; i++)
 	{
